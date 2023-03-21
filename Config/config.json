@@ -1,0 +1,224 @@
+{
+  "devices": [
+    {
+      "router":"RUTX11",
+      "registers": [
+        {
+          "address":"1",
+          "representation": "int",
+          "number":"2",
+          "verify":"awk '{ print int($1) + 1 }' /proc/uptime"
+        },
+        {
+          "address":"3",
+          "representation": "int",
+          "number":"2",
+          "verify":"gsmctl -q | grep 'RSSI' | awk '{ print $2; }'"
+        },
+        {
+          "address":"5",
+          "representation": "int",
+          "number":"2",
+          "verify":"gsmctl -c"
+        },
+        {
+          "address":"7",
+          "representation": "text",
+          "number":"16",
+          "verify":"uci get system.system.hostname"
+        },
+        {
+          "address":"23",
+          "representation": "text",
+          "number":"16",
+          "verify":"gsmctl -o"
+        },
+        {
+          "address":"39",
+          "representation": "text",
+          "number":"16",
+          "verify":"mnf_info -s"
+        },
+        {
+          "address":"55",
+          "representation": "text",
+          "number":"16",
+          "verify":"mnf_info -m"
+        },
+        {
+          "address":"71",
+          "representation": "text",
+          "number":"16",
+          "verify":"uci get system.system.routername"
+        },
+        {
+          "address":"87",
+          "representation": "text",
+          "number":"16",
+          "verify":""
+        },
+        {
+          "address":"103",
+          "representation": "text",
+          "number":"16",
+          "verify":"gsmctl -g"
+        },
+        {
+          "address":"119",
+          "representation": "text",
+          "number":"16",
+          "verify":"gsmctl -t"
+        },
+        {
+          "address":"139",
+          "representation": "int",
+          "number":"2",
+          "verify":"curl ifconfig.me"
+        },
+        {
+          "address":"185",
+          "representation": "int",
+          "number":"2",
+          "verify":"gsmctl -r wwan0"
+        },
+        {
+          "address":"187",
+          "representation": "int",
+          "number":"2",
+          "verify":"gsmctl -e wwan0"
+        },
+        {
+          "address":"189",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        },
+        {
+          "address":"191",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        },
+        {
+          "address":"193",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        },
+        {
+          "address":"195",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        },
+        {
+          "address":"328",
+          "representation": "text",
+          "number":"8",
+          "verify":"uci get simcard.@simman[0].info_modem_id"
+        },
+        {
+          "address":"348",
+          "representation": "text",
+          "number":"16",
+          "verify":"gsmctl -x"
+        },
+        {
+          "address":"364",
+          "representation": "int",
+          "number":"2",
+          "verify":"date +%s"
+        },
+        {
+          "address":"366",
+          "representation": "text",
+          "number":"12",
+          "verify":"date +'%Y-%m-%dT%H:%M:%S%z'"
+        },
+        {
+          "address":"378",
+          "representation": "text",
+          "number":"12",
+          "verify":"date -u +'%Y-%m-%dT%H:%M:%S%z'"
+        },
+        {
+          "address":"394",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        }
+      ]
+    },
+    {
+      "router":"RUTX10",
+      "registers": [
+        {
+          "address":"1",
+          "representation": "int",
+          "number":"2",
+          "verify":"awk '{ print int($1) + 1 }' /proc/uptime"
+        },
+        {
+          "address":"7",
+          "representation": "text",
+          "number":"16",
+          "verify":"uci get system.system.hostname"
+        },
+        {
+          "address":"39",
+          "representation": "text",
+          "number":"16",
+          "verify":"mnf_info -s"
+        },
+        {
+          "address":"55",
+          "representation": "text",
+          "number":"16",
+          "verify":"mnf_info -m"
+        },
+        {
+          "address":"71",
+          "representation": "text",
+          "number":"16",
+          "verify":"uci get system.system.routername"
+        },
+        {
+          "address":"139",
+          "representation": "int",
+          "number":"2",
+          "verify":"curl ifconfig.me"
+        },
+        {
+          "address":"328",
+          "representation": "text",
+          "number":"8",
+          "verify":"uci get simcard.@simman[0].info_modem_id"
+        },
+        {
+          "address":"364",
+          "representation": "int",
+          "number":"2",
+          "verify":"date +%s"
+        },
+        {
+          "address":"366",
+          "representation": "text",
+          "number":"12",
+          "verify":"date +'%Y-%m-%dT%H:%M:%S%z'"
+        },
+        {
+          "address":"378",
+          "representation": "text",
+          "number":"12",
+          "verify":"date -u +'%Y-%m-%dT%H:%M:%S%z'"
+        },
+        {
+          "address":"394",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        }
+      ]
+    }
+  ]
+}
