@@ -6,6 +6,7 @@ Before you begin, these are the libraries you will need to install:
 ```
 pip install paramiko
 pip install argparse
+pip install pymodbus
 ```
 Then you must connect your desired device to your computer using an ethernet cable. Navigate to it's WebUI and enable modubs in Services>Modbus>Modbus TCP Slave.
 #### Program
