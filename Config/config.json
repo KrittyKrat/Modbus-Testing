@@ -228,7 +228,14 @@
           "address":"394",
           "representation": "int",
           "number":"2",
-          "verify":""
+          "verify":"ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' |  grep '192.168'"
+        }
+        ,
+        {
+          "address":"999",
+          "representation": "int",
+          "number":"999",
+          "verify":"what is this"
         }
       ]
     }

@@ -62,6 +62,9 @@ def verifyExpected(register, passedCommands, failedCommands, ssh):
         failedCommands += 1
         register.success = False
 
+    if len(register.expected) == 0:
+        register.expected = "----"
+
     return passedCommands, failedCommands
 
 def testAll(registers, sshVar, modVar):
@@ -75,16 +78,17 @@ def testAll(registers, sshVar, modVar):
     terminal.terminal("Address", "Number", "Representation", "Gotten", "Expected", "Passed", "Failed", "Total", False)
 
     for r in registers:
-        
         try:
             temp = client.read_holding_registers(int(r.address), int(r.number), unit=id)
             r.gotten = parseValue(r, temp)
-            passedCommands, failedCommands = verifyExpected(r, passedCommands, failedCommands, ssh)
-            terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
         except:
-            print("Connection lost")
-            quit()
+            r.gotten = "----"
+            pass
 
+        passedCommands, failedCommands = verifyExpected(r, passedCommands, failedCommands, ssh)
+        terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, True)
+
+    terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
     ssh.close()
     client.close()
 
@@ -94,6 +98,8 @@ def parseValue(r, temp):
     elif r.represent == "text":
         mapping =  dict.fromkeys(range(32))
         result = temp.encode().decode('utf-8').strip().translate(mapping)
+        if len(result) == 0:
+            result = "----"
     return result
 
 def getIntValue(rez, register):

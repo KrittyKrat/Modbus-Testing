@@ -1,0 +1,13 @@
+Register,Representation,Gotten,Expected,Pass
+1,int,17026,17026,True
+7,text,Teltonika-RUTX10.com,Teltonika-RUTX10.com,True
+39,text,1119379240,1119379240,True
+55,text,001E424A4C27,001E424A4C27,True
+71,text,RUTX10,RUTX10,True
+139,int,192.168.10.249,88.119.152.93,False
+328,text,----,----,False
+364,int,1679399414,1679399414,True
+366,text,2023-03-21T13:50:14+0200,2023-03-21T13:50:14+0200,True
+378,text,2023-03-21T11:50:14+0000,2023-03-21T11:50:14+0000,True
+394,int,192.168.1.1,192.168.1.1,True
+999,int,----,----,False
