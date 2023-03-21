@@ -8,10 +8,11 @@ def main():
     routerName =  args.name.upper()
     jsonFile = args.file
     sshVar = args.ssh
+    modVar = args.mod
 
     print("Router being tested: " + routerName)
     registers = inUtil.readConfigFile(routerName, jsonFile)
-    test.testAll(registers, sshVar)
+    test.testAll(registers, sshVar, modVar)
     outUtil.writeToCSV(registers, routerName)
 
 if __name__ == "__main__":

@@ -112,6 +112,18 @@
           "verify":""
         },
         {
+          "address":"197",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        },
+        {
+          "address":"199",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        },
+        {
           "address":"328",
           "representation": "text",
           "number":"8",
@@ -145,7 +157,7 @@
           "address":"394",
           "representation": "int",
           "number":"2",
-          "verify":""
+          "verify":"ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' |  grep '192.168'"
         }
       ]
     },

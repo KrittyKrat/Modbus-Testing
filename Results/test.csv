@@ -1,7 +1,7 @@
 Register,Representation,Gotten,Expected,Pass
-1,int,4590,4590,True
-3,int,-43,-43,True
-5,int,460,460,True
+1,int,17662,17663,False
+3,int,-84,-84,True
+5,int,500,500,True
 7,text,Teltonika-RUTX11.com,Teltonika-RUTX11.com,True
 23,text,Bite BITE,Bite BITE,True
 39,text,1103627779,1103627779,True
@@ -10,16 +10,18 @@ Register,Representation,Gotten,Expected,Pass
 87,text,sim1,,False
 103,text,"Registered, home","Registered, home",True
 119,text,LTE,LTE,True
-139,int,168.15.172.4,84.15.172.4,False
-185,int,285596,289530,False
-187,int,221052,226982,False
-189,int,46243478,,False
-191,int,5242439,,False
-193,int,68783782,,False
-195,int,23031712,,False
+139,int,84.15.172.4,84.15.172.4,True
+185,int,1070939,1074896,False
+187,int,915809,923009,False
+189,int,49759929,,False
+191,int,8253516,,False
+193,int,72300233,,False
+195,int,26042789,,False
+197,int,23784436,,False
+199,int,3233015,,False
 328,text,3-1,3-1,True
 348,text,246020102487106,246020102487106,True
-364,int,1679383841,1679383841,True
-366,text,2023-03-21T09:30:41+0200,2023-03-21T09:30:41+0200,True
-378,text,2023-03-21T07:30:41+0000,2023-03-21T07:30:41+0000,True
-394,int,192.168.128.1,,False
+364,int,1679396912,1679396912,True
+366,text,2023-03-21T13:08:32+0200,2023-03-21T13:08:32+0200,True
+378,text,2023-03-21T11:08:32+0000,2023-03-21T11:08:32+0000,True
+394,int,192.168.1.1,192.168.1.1,True

@@ -16,5 +16,6 @@ def arguments():
     parser.add_argument('--name', type=str, help='Name of the router', required=True)
     parser.add_argument('--file', type=str, help='Name of the config .json file', required=True)
     parser.add_argument('--ssh', type=str, help='Ssh variables (ip, username, password)', nargs=3, required=False)
+    parser.add_argument('--mod', type=str, help='Modbus variables (ip, port, id)', nargs=3, required=False)
     args = parser.parse_args()
     return args

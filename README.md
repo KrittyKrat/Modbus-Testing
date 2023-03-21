@@ -11,11 +11,11 @@ Then you must connect your desired device to your computer using an ethernet cab
 #### Program
 You can run the program using:
 ```
-python3 main.py [--name] "router name" [--file] "config file location" [--ssh] "ssh variables
+python3 main.py [--name] "router name" [--file] "config file location" [--ssh] "ssh variables [--mod] "modbus variables"
 ```
 The router name and file are mandatory arguments and must be pasted correctly. Ssh variables are optional if you decide to customize your ssh connection and want to set your own variables for the hostname, user and password. Here are a few examples of how to use the program:
 ```
-python3 main.py --name RUTX11 --file Config/config.json
+python3 main.py --name RUTX11 --file Config/config.json --mod 192.168.1.1 502 1
 python3 main.py --name RUT955 --file /home/stud/testCom.json --ssh 192.168.3.1 root admin
 ```
 While running the program you will be able to see live results like the modbus register being tested, it's representation, result, excpected value, total number of commands to be tested, how many commands passed and failed the test.
