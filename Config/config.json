@@ -70,6 +70,12 @@
           "verify":"gsmctl -t"
         },
         {
+          "address":"119",
+          "representation": "text",
+          "number":"16",
+          "verify":"gsmctl -t"
+        },
+        {
           "address":"139",
           "representation": "int",
           "number":"2",
@@ -212,6 +218,12 @@
           "representation": "int",
           "number":"2",
           "verify":"ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' |  grep '192.168'"
+        },
+        {
+          "address":"397",
+          "representation": "text",
+          "number":"16",
+          "verify":""
         }
       ]
     },
@@ -290,6 +302,29 @@
           "representation": "int",
           "number":"999",
           "verify":"what is this"
+        }
+      ]
+    },
+    {
+      "router":"RUT956",
+      "registers": [
+        {
+          "address":"135",
+          "representation": "int",
+          "number":"2",
+          "verify":"ubus call ioman.gpio.din1 status | grep 'value' | awk '{ print $2; }' | tr -d '\"',"
+        },
+        {
+          "address":"137",
+          "representation": "int",
+          "number":"2",
+          "verify":"ubus call ioman.gpio.din2 status | grep 'value' | awk '{ print $2; }' | tr -d '\"',"
+        },
+        {
+          "address":"141",
+          "representation": "int",
+          "number":"2",
+          "verify":"ubus call ioman.adc.adc0 status | grep '\"value\"' | awk '{ print int($2*1000) }' | tr -d ,"
         }
       ]
     }
