@@ -86,7 +86,7 @@ def testAll(registers, sshVar, modVar):
             pass
 
         passedCommands, failedCommands = verifyExpected(r, passedCommands, failedCommands, ssh)
-        terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, True)
+        terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
 
     terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
     ssh.close()
@@ -107,8 +107,13 @@ def getIntValue(rez, register):
         return getSignalStrength(rez)
     elif register.address == "139" or register.address == "394":
         return getIP(rez)
+    elif len(rez) == 1:
+        return getIO(rez)
     else:
         return getBytes(rez)
+
+def getIO(temp):
+    return temp[0]
 
 def getSignalStrength(temp):
     bits = bin(temp[1]).replace("0b", "")

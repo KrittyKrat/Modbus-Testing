@@ -4,7 +4,7 @@ import csv
 def writeToCSV(registers, routerName):
     tempName = routerName + "_" + datetime.now().strftime('%Y-%m-%d_%H:%M:%S') + ".csv"
     fileName = "Results/" + tempName
-    #fileName = "Results/test.csv"
+    fileName = "Results/test.csv"
     
     try:
         file = open(fileName, 'w')

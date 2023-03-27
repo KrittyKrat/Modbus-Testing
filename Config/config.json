@@ -55,7 +55,7 @@
           "address":"87",
           "representation": "text",
           "number":"16",
-          "verify":""
+          "verify":"ubus call sim get | grep 'sim' | awk '{ print \"sim\" $2; }'"
         },
         {
           "address":"103",
@@ -79,13 +79,13 @@
           "address":"185",
           "representation": "int",
           "number":"2",
-          "verify":"gsmctl -r wwan0"
+          "verify":"ubus call vuci.network.mobile mobile_usage '{\"interval\":\"day\",\"sim\":\"1\",\"modemId\":\"3-1\"}' | sed 's/[^0-9]*//g' | awk 'NR==5'"
         },
         {
           "address":"187",
           "representation": "int",
           "number":"2",
-          "verify":"gsmctl -e wwan0"
+          "verify":"ubus call vuci.network.mobile mobile_usage '{\"interval\":\"day\",\"sim\":\"1\",\"modemId\":\"3-1\"}' | sed 's/[^0-9]*//g' | awk 'NR==6'"
         },
         {
           "address":"189",
@@ -122,6 +122,60 @@
           "representation": "int",
           "number":"2",
           "verify":""
+        },
+        {
+          "address":"205",
+          "representation": "int",
+          "number":"1",
+          "verify":"ubus call sim get | grep 'sim' | awk '{ print $2; }'"
+        },
+        {
+          "address":"292",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        },
+        {
+          "address":"294",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        },
+        {
+          "address":"296",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        },
+        {
+          "address":"298",
+          "representation": "int",
+          "number":"2",
+          "verify":""
+        },
+        {
+          "address":"300",
+          "representation": "int",
+          "number":"2",
+          "verify":"ubus call vuci.network.mobile mobile_usage '{\"interval\":\"day\",\"sim\":\"2\",\"modemId\":\"3-1\"}' | sed 's/[^0-9]*//g' | awk 'NR==5'"
+        },
+        {
+          "address":"302",
+          "representation": "int",
+          "number":"2",
+          "verify":"ubus call vuci.network.mobile mobile_usage '{\"interval\":\"day\",\"sim\":\"2\",\"modemId\":\"3-1\"}' | sed 's/[^0-9]*//g' | awk 'NR==6'"
+        },
+        {
+          "address":"324",
+          "representation": "int",
+          "number":"1",
+          "verify":"ubus call ioman.gpio.din1 status | grep 'value' | awk '{ print $2; }' | tr -d '\"',"
+        },
+        {
+          "address":"325",
+          "representation": "int",
+          "number":"1",
+          "verify":"ubus call ioman.gpio.din1 status | grep 'value' | awk '{ print $2; }' | tr -d '\"',"
         },
         {
           "address":"328",
