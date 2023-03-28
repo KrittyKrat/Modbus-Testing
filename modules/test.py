@@ -1,7 +1,7 @@
 import paramiko
 from pymodbus.client.sync import ModbusTcpClient
+import pymodbus
 from modules import terminal
-import time
 
 #        self.address = address
 #        self.number = number
@@ -46,7 +46,7 @@ def executeCommand(sc, command):
         stdin,stdout,stderr = sc.exec_command(command, timeout=1)
         return stdout
     except:
-        print("\nConnection lost")
+        print("\nConnection to ssh lost, retrying...", end='\r')
         quit()
 
 def verifyExpected(register, passedCommands, failedCommands, ssh):
@@ -85,18 +85,27 @@ def testAll(registers, sshVar, modVar):
 
         if r.verify == "SecretSMSMethod":
             thing = [0x3030, 0x3131, 0x3132, 0x3334, 0x3536, 0x3738, 0x3900, 0 ,0, 0 ,0x4865 ,0x6C6C ,0x6F]
-            client.write_registers(int(r.address), thing, unit=id)
+            try:
+                client.write_registers(int(r.address), thing, unit=id)
+            except:
+                print()
+                print("Failed to write to register")
+                quit()
         try:
             temp = client.read_holding_registers(int(r.address), int(r.number), unit=id)
             r.gotten = parseValue(r, temp)
+        except pymodbus.exceptions.ModbusException as e:
+            print()
+            print("Connection to modbus lost",)
+            quit()
         except:
             r.gotten = "----"
             pass
         
         passedCommands, failedCommands = verifyExpected(r, passedCommands, failedCommands, ssh)
-        terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
+        terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, True)
 
-    #terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
+    terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
     ssh.close()
     client.close()
 
@@ -109,9 +118,6 @@ def parseValue(r, temp):
         if len(result) == 0:
             result = "----"
     return result
-
-def SecretSMSMethod():
-    print()
 
 def getIntValue(rez, register):
     if register.address == "3":
