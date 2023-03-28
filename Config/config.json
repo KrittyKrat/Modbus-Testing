@@ -222,8 +222,8 @@
         {
           "address":"397",
           "representation": "text",
-          "number":"16",
-          "verify":""
+          "number":"32",
+          "verify":"SecretSMSMethod"
         }
       ]
     },

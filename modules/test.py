@@ -1,6 +1,7 @@
 import paramiko
 from pymodbus.client.sync import ModbusTcpClient
 from modules import terminal
+import time
 
 #        self.address = address
 #        self.number = number
@@ -55,6 +56,9 @@ def verifyExpected(register, passedCommands, failedCommands, ssh):
     except:
         pass
 
+    if register.verify == "SecretSMSMethod":
+        register.expected = "@0011123456789Hello"
+
     if register.gotten == register.expected:
         passedCommands += 1
         register.success = True
@@ -78,17 +82,22 @@ def testAll(registers, sshVar, modVar):
     terminal.terminal("Address", "Number", "Representation", "Gotten", "Expected", "Passed", "Failed", "Total", False)
 
     for r in registers:
+
+        if r.verify == "SecretSMSMethod":
+            thing = [0x3030, 0x3131, 0x3132, 0x3334, 0x3536, 0x3738, 0x3900, 0 ,0, 0 ,0x4865 ,0x6C6C ,0x6F]
+            tsg = client.write_registers(int(r.address), thing, unit=id)
+            temp = client.read_holding_registers(int(r.address), int(r.number), unit=id)
         try:
             temp = client.read_holding_registers(int(r.address), int(r.number), unit=id)
             r.gotten = parseValue(r, temp)
         except:
             r.gotten = "----"
             pass
-
+        
         passedCommands, failedCommands = verifyExpected(r, passedCommands, failedCommands, ssh)
         terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
 
-    terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
+    #terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
     ssh.close()
     client.close()
 
@@ -101,6 +110,9 @@ def parseValue(r, temp):
         if len(result) == 0:
             result = "----"
     return result
+
+def SecretSMSMethod():
+    print()
 
 def getIntValue(rez, register):
     if register.address == "3":
