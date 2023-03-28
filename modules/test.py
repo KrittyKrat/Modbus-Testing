@@ -85,8 +85,7 @@ def testAll(registers, sshVar, modVar):
 
         if r.verify == "SecretSMSMethod":
             thing = [0x3030, 0x3131, 0x3132, 0x3334, 0x3536, 0x3738, 0x3900, 0 ,0, 0 ,0x4865 ,0x6C6C ,0x6F]
-            tsg = client.write_registers(int(r.address), thing, unit=id)
-            temp = client.read_holding_registers(int(r.address), int(r.number), unit=id)
+            client.write_registers(int(r.address), thing, unit=id)
         try:
             temp = client.read_holding_registers(int(r.address), int(r.number), unit=id)
             r.gotten = parseValue(r, temp)
