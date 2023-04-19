@@ -1,5 +1,5 @@
 import json
-from modules.registers import Register
+from modules.register_class import Register
 
 def openJson(jsonFile):
     try:

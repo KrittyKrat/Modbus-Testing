@@ -1,15 +1,7 @@
 import paramiko
 from pymodbus.client.sync import ModbusTcpClient
 import pymodbus
-from modules import terminal
-
-#        self.address = address
-#        self.number = number
-#        self.represent = represent
-#        self.verify = verify
-#        self.gotten = ""
-#        self.expected = ""
-#        self.success = ""
+from modules import terminal_utility
 
 def connectModbus(modVar):
     try:
@@ -23,6 +15,7 @@ def connectModbus(modVar):
         print("Wrong modbus client variables")
         quit()
     
+    client.timeout = 2
     client.connect()
     return client, id
 
@@ -61,10 +54,10 @@ def verifyExpected(register, passedCommands, failedCommands, ssh):
 
     if register.gotten == register.expected:
         passedCommands += 1
-        register.success = True
+        register.success = "Passed"
     else:
         failedCommands += 1
-        register.success = False
+        register.success = "Failed"
 
     if len(register.expected) == 0:
         register.expected = "----"
@@ -79,33 +72,38 @@ def testAll(registers, sshVar, modVar):
     passedCommands = 0
     failedCommands = 0
 
-    terminal.terminal("Address", "Number", "Representation", "Gotten", "Expected", "Passed", "Failed", "Total", False)
+    terminal_utility.terminal("Address", "Number", "Representation", "Gotten", "Expected", "Passed", "Failed", "Total", False)
 
     for r in registers:
+        if not client.is_socket_open():
+            print("Modbus connection lost")
+            quit()
 
         if r.verify == "SecretSMSMethod":
             thing = [0x3030, 0x3131, 0x3132, 0x3334, 0x3536, 0x3738, 0x3900, 0 ,0, 0 ,0x4865 ,0x6C6C ,0x6F]
             try:
                 client.write_registers(int(r.address), thing, unit=id)
             except:
-                print()
-                print("Failed to write to register")
-                quit()
+                passedCommands, failedCommands = verifyExpected(r, passedCommands, failedCommands, ssh)
+                r.gotten = "----"
+                terminal_utility.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
+                print("Failed to write to register\r")
+                continue
         try:
             temp = client.read_holding_registers(int(r.address), int(r.number), unit=id)
             r.gotten = parseValue(r, temp)
         except pymodbus.exceptions.ModbusException as e:
-            print()
-            print("Connection to modbus lost",)
-            quit()
+            print("Modbus error")
+            r.gotten = "----"
+            pass
         except:
             r.gotten = "----"
             pass
         
         passedCommands, failedCommands = verifyExpected(r, passedCommands, failedCommands, ssh)
-        terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, True)
+        terminal_utility.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
 
-    terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
+    #terminal.terminal(r.address, r.number, r.represent, r.gotten, r.expected, passedCommands, failedCommands, totalCommands, False)
     ssh.close()
     client.close()
 

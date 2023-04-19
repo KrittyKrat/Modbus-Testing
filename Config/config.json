@@ -13,7 +13,7 @@
           "address":"asd",
           "representation": "int",
           "number":"2132",
-          "verify":"ls"
+          "verify":"bazinga"
         },
         {
           "address":"3",
@@ -202,6 +202,12 @@
           "verify":"gsmctl -x"
         },
         {
+          "address":"397",
+          "representation": "text",
+          "number":"32",
+          "verify":"SecretSMSMethod"
+        },
+        {
           "address":"364",
           "representation": "int",
           "number":"2",
@@ -224,13 +230,8 @@
           "representation": "int",
           "number":"2",
           "verify":"ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' |  grep '192.168'"
-        },
-        {
-          "address":"397",
-          "representation": "text",
-          "number":"32",
-          "verify":"SecretSMSMethod"
         }
+
       ]
     },
     {
